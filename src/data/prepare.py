@@ -17,4 +17,4 @@ def make_text_dataframe(true_path, fake_path, output_path):
         'text': true_texts + fake_texts,
         'label': len(true_texts) * ['true'] + len(fake_texts) * ['fake']
     })
-    text_df.to_csv(output_path)
+    text_df.to_csv(output_path, index=False, mode='w')
