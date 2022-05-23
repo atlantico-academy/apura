@@ -62,7 +62,7 @@ Descreva aqui quais os passos necessários (dependências externas, comandos, et
 
 ## Desenvolvedores
  - [Tayná Fiúza](https://github.com/fiuzatayna)
- - [Contribuidor 2](http://github.com/contribuidor_2)
+ - [Samya Maria](https://github.com/SamyaMaria)
 
 ## Organização de diretórios
 
