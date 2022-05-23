@@ -39,7 +39,7 @@ Exemplo de objetivos e resultados chave aplicados a projetos de ciência de dado
 
 
 
- - Realizar uma análise exploratória de dados [Fake.br-Corpus de @roneysco]https://github.com/roneysco/Fake.br-Corpus)
+ - Realizar uma análise exploratória de dados [Fake.br-Corpus de @roneysco](https://github.com/roneysco/Fake.br-Corpus)
     - Identificar variáveis, descrevê-las e definir os tipos de dados
     - Remover palavras irrelevantes, emojis, etc
     - Lematizar as palavras flexionadas
