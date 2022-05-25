@@ -6,6 +6,7 @@ def show_wordcloud(data, stopwords, title = None):
     text = " ".join(word for word in data)
 
     wordcloud = WordCloud(stopwords = stopwords,
+                          collocations=False,
                           background_color='white').generate(text)
 
     fig, ax = plt.subplots(figsize=(10,6))
