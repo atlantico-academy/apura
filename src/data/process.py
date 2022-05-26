@@ -1,4 +1,5 @@
 from sklearn.feature_extraction.text import CountVectorizer 
+import re
 
 def create_corpus(text_series):
     corpus = []
@@ -15,3 +16,9 @@ def get_top_ngram(corpus, n=None, top=10, stop_words=None):
                   for word, idx in vector.vocabulary_.items()]
     words_freq = sorted(words_freq, key = lambda x: x[1], reverse=True)
     return words_freq[:top]
+
+def remove_day(text):
+    palavras = ['quarta-feira', 'segunda-feira', 'terça-feira', 'sexta-feira', 'quinta-feira']
+    for i in palavras:
+        text = re.sub(r'\s'+i+'([\s,\.])',r'\1',text) 
+    return text
