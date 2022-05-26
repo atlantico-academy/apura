@@ -17,8 +17,34 @@ def get_top_ngram(corpus, n=None, top=10, stop_words=None):
     words_freq = sorted(words_freq, key = lambda x: x[1], reverse=True)
     return words_freq[:top]
 
-def remove_day(text):
-    palavras = ['quarta-feira', 'segunda-feira', 'terça-feira', 'sexta-feira', 'quinta-feira']
+def remove_weekday(text):
+    palavras = ['quarta-feira', 'segunda-feira', 'terça-feira', 'sexta-feira', 'quinta-feira', 'sábado', 'domingo']
     for i in palavras:
-        text = re.sub(r'\s'+i+'([\s,\.])',r'\1',text) 
+        #text = re.sub(r'\s'+i+'([\s,\.])',r'\1',text) 
+        text = text.replace(i, '')
     return text
+
+def remove_date(text_series, style='diamesano'):
+    if style == 'diamesextensoano':
+        pattern = '([0-2][0-9]|(3)[0-1]) de *\w* de \d{4}'
+    else:
+        pattern = '([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}'
+    size = text_series[text_series.str.contains(pattern)].size
+    print("Modificando "+str(size)+" linhas contendo este padrão.")
+    clean_text_series = text_series.apply(lambda x: re.sub(pattern,'', x))
+    return clean_text_series
+
+def remove_linebreaks(text_series):
+    pattern = '\n'    
+    size = text_series[text_series.str.contains(pattern, regex=False)].size
+    print("Modificando "+str(size)+" linhas contendo este padrão.")
+    clean_text_series = text_series.str.replace(pattern, ' ')
+    return clean_text_series
+
+def remove_tabs(text_series):
+    pattern = '\t'    
+    size = text_series[text_series.str.contains(pattern, regex=False)].size
+    print("Modificando "+str(size)+" linhas contendo este padrão.")
+    clean_text_series = text_series.str.replace(pattern, ' ')
+    return clean_text_series
+
