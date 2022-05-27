@@ -2,21 +2,32 @@ from matplotlib import pyplot as plt
 from wordcloud import WordCloud
 from PIL import Image
 
-def show_wordcloud(data, stopwords, title = None):
+def show_wordcloud(data, stopwords = None, title = None):
     text = " ".join(word for word in data)
 
     wordcloud = WordCloud(stopwords = stopwords,
                           collocations=False,
                           background_color='white').generate(text)
 
-    fig, ax = plt.subplots(figsize=(10,6))
+    fig, ax = plt.subplots(figsize=(16,12))
     ax.imshow(wordcloud, interpolation='bilinear')
     ax.set_axis_off()
     if title: 
-        fig.suptitle(title, fontsize=20)
+        fig.suptitle(title, fontsize=30)
         fig.subplots_adjust(top=1)
 
     plt.imshow(wordcloud)
+    
+def dict_to_wordcloud(dictionary, title = None):
+    cloud = WordCloud(max_font_size=80,
+                      background_color='white').generate_from_frequencies(dictionary)
+    fig, ax = plt.subplots(figsize=(16,12))
+    ax.imshow(cloud, interpolation='bilinear')
+    ax.set_axis_off()
+    if title:
+        fig.suptitle(title, fontsize=30)
+        fig.subplots_adjust(top=1)
+    plt.imshow(cloud)
     
 def show_ngrams(true_n_gram, fake_n_gram):
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6, 8))
