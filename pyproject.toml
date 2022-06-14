@@ -16,6 +16,8 @@ mkdocs = "^1.3.0"
 invoke = "^1.7.0"
 nltk = "^3.7"
 wordcloud = "^1.8.1"
+Scrapy = "^2.6.1"
+crochet = "^2.0.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
