@@ -71,7 +71,7 @@ class G1Spider(scrapy.Spider):
         
         yield item
 
-@wait_for(5)
+@wait_for(timeout = 600)
 def run_g1ff_spider():
     """run spider with G1Spider"""
     crawler = CrawlerRunner()
@@ -93,7 +93,7 @@ class BoatosSpider(scrapy.Spider):
     start_urls = ['https://boatos.org/politica'] 
     custom_settings = {
         'FEEDS': {
-            '../data/raw/scraping/boatos.csv': {
+            '../data/raw/scraping/boatosb.csv': {
                 'format': 'csv',
                 'overwrite': True
             }
@@ -129,8 +129,11 @@ class BoatosSpider(scrapy.Spider):
 
         item['autoria'] = response.meta["autoria"]
       
-        tags = response.xpath("*//script[@class='yoast-schema-graph']/text()").re(r'keywords":(.+?])')[0]
-        item['tags'] = ';'.join(re.findall(r'\"(.+?)\"', tags))
+        try:
+            tags = response.xpath("*//script[@class='yoast-schema-graph']/text()").re(r'keywords":(.+?])')[0]
+            item['tags'] = ';'.join(re.findall(r'\"(.+?)\"', tags))
+        except IndexError:
+            item['tags'] = None
       
         item['principal'] = response.xpath("*//strong/text()").get()
         item['texto'] = response.xpath("*//article//p/text()").get()
@@ -139,7 +142,7 @@ class BoatosSpider(scrapy.Spider):
 
         yield item
 
-@wait_for(timeout = 90)
+@wait_for(timeout = 10)
 def run_boatos_spider():
     """run spider with BoatosSpider"""
     crawler = CrawlerRunner()
