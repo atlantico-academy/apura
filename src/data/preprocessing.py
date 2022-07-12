@@ -1,6 +1,7 @@
 import re
 import string
 
+import pandas as pd
 import spacy
 import nltk
 from nltk.corpus import stopwords
@@ -17,7 +18,7 @@ def tokenize(text_series):
     token_text = []
     for text in text_series:
         token_text.append(nltk.word_tokenize(text))
-    return token_text
+    return pd.Series(token_text)
 
 # Remover termos específicos
 def remove_weekday(text):

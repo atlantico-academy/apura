@@ -1,5 +1,6 @@
 import numpy as np 
 
+
 def concatenate(*args):
     final_dict = {key: [] for key in args[0].keys()}
     for dictionary in args:
@@ -15,3 +16,12 @@ def highlight_max(s, props=''):
     else:
         result[np.argmax(values)+1] = props
     return result
+
+def get_winner(s, models):
+    metric = s.values[0]
+    values = [float(value.split()[0]) for value in s.values[1:]]
+    
+    if s.values[0].endswith('time'):
+        return models[np.argmin(values)]
+    else:
+        return models[np.argmax(values)]
