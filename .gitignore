@@ -176,3 +176,6 @@ cython_debug/
 #.idea/
 
 # End of https://www.toptal.com/developers/gitignore/api/python,jupyternotebooks
+
+# Big Files
+data/processed/textos_pre-processados.csv
