@@ -9,16 +9,10 @@ from nltk.tokenize import word_tokenize
 
 nltk.download('stopwords')
 
-# Converter para minúsculo
-def lower_case(text_series):
-    return text_series.apply(lambda x: x.lower())
-
 # Tokenização
-def tokenize(text_series):
-    token_text = []
-    for text in text_series:
-        token_text.append(nltk.word_tokenize(text))
-    return pd.Series(token_text)
+def tokenize(text):
+    tokens = nltk.word_tokenize(text)
+    return tokens
 
 # Remover termos específicos
 def remove_weekday(text):
@@ -28,32 +22,26 @@ def remove_weekday(text):
         text = text.replace(i, '')
     return text
 
-def remove_date(text_series, style='diamesano'):
+def remove_date(text, style='diamesano'):
     if style == 'diamesextensoano':
         pattern = '([0-2][0-9]|(3)[0-1]) de *\w* de \d{4}'
     else:
         pattern = '([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}'
-    size = text_series[text_series.str.contains(pattern)].size
-    print("Modificando "+str(size)+" linhas contendo este padrão.")
-    clean_text_series = text_series.apply(lambda x: re.sub(pattern,'', x))
-    return clean_text_series
+    clean_text = re.sub(pattern,'', text)
+    return clean_text
 
-def remove_linebreaks(text_series):
+def remove_linebreaks(text):
     pattern = '\n'    
-    size = text_series[text_series.str.contains(pattern, regex=False)].size
-    print("Modificando "+str(size)+" linhas contendo este padrão.")
-    clean_text_series = text_series.str.replace(pattern, ' ')
-    return clean_text_series
+    clean_text = text.replace(pattern, ' ')
+    return clean_text
 
-def remove_tabs(text_series):
+def remove_tabs(text):
     pattern = '\t'    
-    size = text_series[text_series.str.contains(pattern, regex=False)].size
-    print("Modificando "+str(size)+" linhas contendo este padrão.")
-    clean_text_series = text_series.str.replace(pattern, ' ')
-    return clean_text_series
+    clean_text = text.replace(pattern, ' ')
+    return clean_text
 
 # Remover símbolos (caracteres especiais)
-def symbol_remove(text_series):
+def symbol_remove(text):
     # Obtendo os caracteres especiais
     punctuation = list(string.punctuation) # Obtendo os caracteres especiais como lista
     del(punctuation[12]) # Excluindo da remoção o caractere especial "-"
@@ -61,32 +49,26 @@ def symbol_remove(text_series):
     
     # Realizando a remoção
     size = 0
-    for pattern in punctuation:
-        size += text_series[text_series.str.contains(pattern, regex=False)].size
-    print("Modificando "+str(size)+" linhas contendo este padrão.")
-    clean_text_series = text_series.apply(lambda c: re.sub('[%s]' % re.escape(punctuation), '', c))
-    return clean_text_series
+    clean_text = re.sub('[%s]' % re.escape(punctuation), '', text)
+    return clean_text
 
 # Remover stopwords
-def stopwords_remove(tokenized_texts):
-    text_no_stopwords = []
-    for text in tokenized_texts:
-        text_no_stopwords.append([word for word in text if word not in stopwords.words('portuguese')])
-    return text_no_stopwords
+def stopwords_remove(tokens):
+    pt_stopwords = stopwords.words('portuguese')
+    clean_tokens = tuple(filter(lambda word: word not in pt_stopwords, tokens))
+    return clean_tokens
 
 # Lematização
-def lemmatization(tokenized_texts):
+def lemmatization(text):
     nlp = spacy.load('pt_core_news_sm')
-    lemmas = []
-    for text in tokenized_texts:
-        doc = nlp(" ".join(text))
-        lemmas.append([token.lemma_ for token in doc])
+    doc = nlp(" ".join(text))
+    lemma_tokens = [token.lemma_ for token in doc]
+    lemmas = ' '.join(lemma_tokens)
     return lemmas
 
 # Stemming
-def stemming(tokenized_texts):
+def stemming(text):
     stemmer = nltk.stem.RSLPStemmer()
-    stemmer_text = []
-    for text in tokenized_texts:
-        stemmer_text.append([stemmer.stem(palavra) for palavra in text])
+    stem_tokens = [stemmer.stem(word) for word in text]
+    stemmer_text = ' '.join(stem_tokens)
     return stemmer_text
