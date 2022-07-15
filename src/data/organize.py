@@ -25,3 +25,7 @@ def get_winner(s, models):
         return models[np.argmin(values)]
     else:
         return models[np.argmax(values)]
+    
+def save_object(obj, filename):
+    with open(filename, 'wb') as outp:
+        pickle.dump(obj, outp, pickle.HIGHEST_PROTOCOL)
