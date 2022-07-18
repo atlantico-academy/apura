@@ -18,6 +18,9 @@ nltk = "^3.7"
 wordcloud = "^1.8.1"
 streamlit = "^1.10.0"
 streamlit-on-Hover-tabs = "^1.0.1"
+spacy = "^3.4.0"
+st-annotated-text = "^3.0.0"
+plotly = "^5.9.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
