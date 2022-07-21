@@ -6,7 +6,7 @@ Os dados já [disponíveis](https://github.com/roneysco/Fake.br-Corpus) estão e
 
 Os requerimentos para completude do projeto envolvem: aquisição de mais dados de notícias com diferentes etiquetas, definição das funções de limpeza, pré-processamento e codificação dos dados, padronização dos vocábulos utilizados nos textos, extração dos vetores dos textos, construção e comparação de modelos de aprendizado de máquina, obtenção e seleção de modelo com acurácia superior a 80% e implementação do modelo em página web acessível ao usuário final.
 
-Riscos: falha em atingir o nível de acurácia estabelecido como meta para o projeto, dados usados não estarem totalmente certos, banco de dados ser insuficiente para algumas análises. Contingências (ainda por definir).
+Riscos: falha em atingir o nível de acurácia estabelecido como meta para o projeto, dados usados não estarem totalmente certos, banco de dados ser insuficiente para algumas análises. Contingências (ainda por definir)
 
 Metas de mineração: Realizar web scraping pelo menos uma vez ao dia com o objetivo de buscar o máximo de notícias. O objetivo será concluído se houver a coleta de mais de uma notícia de cada objeto de estudo.
 
