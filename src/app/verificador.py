@@ -15,18 +15,22 @@ from src.data import preprocessing
 
 model = joblib.load('models/best_model.joblib')
 classes = ["fake", "true"]
+classes_pt = ["falsa", "verdadeira"]
 
-default_text = "Estudo mostra que crianças que não tomam vacinas são 5 vezes mais saudáveis. .  Além disso, foi identificado que houve um aumento 1000% na incidência de amigdalite nas crianças que receberam vacinas. Os estudos mostraram, sem dúvida, que crianças não vacinadas são mais saudáveis do que as vacinadas e, por esta razão, os dados devem ser cuidadosamente ponderados pelos pais e profissionais da área da medicina. A intenção da pesquisa era tentar provar que crianças vacinadas eram mais propensas a sofrer de asma, eczema, infecções de ouvido, hiperatividade e outras condições crônicas."
+default_text = "Estudo mostra que crianças que não tomam vacinas são 5 vezes mais saudáveis. Além disso, foi identificado que houve um aumento 1000% na incidência de amigdalite nas crianças que receberam vacinas. Os estudos mostraram, sem dúvida, que crianças não vacinadas são mais saudáveis do que as vacinadas e, por esta razão, os dados devem ser cuidadosamente ponderados pelos pais e profissionais da área da medicina. A intenção da pesquisa era tentar provar que crianças vacinadas eram mais propensas a sofrer de asma, eczema, infecções de ouvido, hiperatividade e outras condições crônicas."
 
 min_words = 50
 
+
+
 def page():
-    st.title("Detector de fakenews")
+    st.title("Detector de Notícias Falsas")
     text = st.text_area(
-        f"Adicione texto da notícia (acima de {min_words} palavras)",
+        f"Adicione texto da notícia que você quer verificar",
         value=default_text,
         placeholder=default_text,
-        max_chars=5000
+        max_chars=5000,
+        height=200
                        )
     if st.button("Verificar"):
         n_words = len(text.split(" "))
@@ -38,13 +42,23 @@ def page():
                 y_hat = model.predict(X_)
                 probs = model.predict_proba(X_)[0]
                 # -----------------------------
+                show_simple_results(y_hat, probs)
                 col1, col2 = st.columns([.6, .4])
                 with col1:
-                    st.text("")
-                    show_simple_results(y_hat, probs)
-                    st.write("Caso queira mais informações sobre essa notícia, confira se ela aparece nos seguintes sites: [Agência Lupa](https://lupa.uol.com.br/), [G1 Fato ou Fake](https://g1.globo.com/fato-ou-fake/), [Boatos.org](https://www.boatos.org/), [E-farsas](https://www.e-farsas.com/) e outros especializados em curadoria de notícias falsas.")
-                with col2:
                     show_results(y_hat, probs)
+                with col2:
+                    st.markdown("""
+                    #### Aviso
+                    
+                    Caso queira mais informações sobre essa notícia, confira se ela aparece nos seguintes sites: 
+                    
+                    - [Agência Lupa](https://lupa.uol.com.br/), 
+                    - [G1 Fato ou Fake](https://g1.globo.com/fato-ou-fake/),
+                    - [Boatos.org](https://www.boatos.org/), 
+                    - [E-farsas](https://www.e-farsas.com/) 
+                    
+                    e outros especializados em curadoria de notícias falsas.""")
+
 
         '''        
         with st.expander("Detalhamento"):
@@ -136,23 +150,23 @@ def show_results(y_hat, probs):
     # with col1:
     #     st.text('Disclaimer')
     # with col2:
-    label = classes[int(y_hat)]    
-    st.markdown(f"""### Escore""")
+    label = classes_pt[int(y_hat)]    
+    st.markdown(f"""#### Escore""")
 
     
-    fig = px.bar(x=classes, y=probs, template="simple_white", width=800, height=300)
+    fig = px.bar(y=classes_pt, x=probs*100, text_auto='.2f', template="simple_white", width=800, height=300, labels={'x':'Probabilidade', 'y':'Categoria'}, orientation='h')
     st.plotly_chart(fig, use_container_width=True)
     
 
 def show_simple_results(y_hat, probs):
-    label = classes[int(y_hat)]
+    label = classes_pt[int(y_hat)]
     text = f"A notícia tem grande probabilidade de ser {label}."
     if probs[classes.index('fake')] >= .8:
-        st.error(text)
+        st.error(f"Cuidado! {text}")
     elif probs[classes.index('fake')] <= .2:
-        st.success(text)
+        st.success(f"Fique tranquilo(a). {text}")
     else:
-        st.info("O modelo não conseguiu identificar se a notícia é verdadeira ou falsa. Verifique os sites: [Agência Lupa](https://lupa.uol.com.br/), [G1 Fato ou Fake](https://g1.globo.com/fato-ou-fake/), [Boatos.org](https://www.boatos.org/), [E-farsas](https://www.e-farsas.com/) e outros especializados em curadoria de notícias falsas.")
+        st.info("O modelo não conseguiu identificar se a notícia é verdadeira ou falsa. Confira o aviso abaixo.")
         
 
 
