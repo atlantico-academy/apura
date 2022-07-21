@@ -19,6 +19,7 @@ wordcloud = "^1.8.1"
 spacy = "^3.3.1"
 gdown = "^4.5.1"
 papermill = "^2.3.4"
+isort = "^5.10.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
