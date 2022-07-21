@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit.components import v1 as components
 
+
 def page():
     st.title('Análise exploratória')
     
