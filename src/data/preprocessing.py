@@ -1,9 +1,9 @@
 import re
 import string
 
+import nltk
 import pandas as pd
 import spacy
-import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 

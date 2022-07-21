@@ -1,5 +1,7 @@
-from sklearn.feature_extraction.text import CountVectorizer 
 import re
+
+from sklearn.feature_extraction.text import CountVectorizer
+
 
 def create_corpus(text_series):
     corpus = []

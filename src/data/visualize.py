@@ -1,6 +1,7 @@
 from matplotlib import pyplot as plt
-from wordcloud import WordCloud
 from PIL import Image
+from wordcloud import WordCloud
+
 
 def show_wordcloud(data, stopwords = None, title = None):
     text = " ".join(word for word in data)
