@@ -1,13 +1,16 @@
 from matplotlib import pyplot as plt
 from PIL import Image
 from wordcloud import WordCloud
-
+import matplotlib
+matplotlib.rcParams["figure.dpi"] = 300
 
 def show_wordcloud(data, stopwords = None, title = None):
     text = " ".join(word for word in data)
 
     wordcloud = WordCloud(stopwords = stopwords,
                           collocations=False,
+                          width=1000, height=500,
+                          max_font_size=200, 
                           background_color='white').generate(text)
 
     fig, ax = plt.subplots(figsize=(16,12))
@@ -19,8 +22,11 @@ def show_wordcloud(data, stopwords = None, title = None):
 
     plt.imshow(wordcloud)
     
-def dict_to_wordcloud(dictionary, title = None):
-    cloud = WordCloud(max_font_size=80,
+def dict_to_wordcloud(dictionary, title = None, colormap = None):
+    cloud = WordCloud(width=1000, height=500, 
+                      max_words=1000, max_font_size=200, 
+                      #min_font_size=15,
+                      colormap = colormap,
                       background_color='white').generate_from_frequencies(dictionary)
     fig, ax = plt.subplots(figsize=(16,12))
     ax.imshow(cloud, interpolation='bilinear')
