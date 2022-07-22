@@ -1857,6 +1857,17 @@ python-versions = ">=3.6"
 streamlit = ">=0.63"
 
 [[package]]
+name = "streamlit-option-menu"
+version = "0.3.2"
+description = "streamlit-option-menu is a simple Streamlit component that allows users to select a single item from a list of options in a menu."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+streamlit = ">=0.63"
+
+[[package]]
 name = "tenacity"
 version = "8.0.1"
 description = "Retry code until it succeeds"
@@ -2177,7 +2188,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "~3.8"
-content-hash = "48969e680785c44455f8a8499f90d57f86e00282b805fbb504f0868976d4a52e"
+content-hash = "80722a7b535ae73af3c1fa7bdb2b4b168d0c479aee32407ebdad837128a503fa"
 
 [metadata.files]
 altair = [
@@ -3088,6 +3099,7 @@ stack-data = [
 ]
 streamlit = []
 streamlit-on-hover-tabs = []
+streamlit-option-menu = []
 tenacity = []
 terminado = [
     {file = "terminado-0.15.0-py3-none-any.whl", hash = "sha256:0d5f126fbfdb5887b25ae7d9d07b0d716b1cc0ccaacc71c1f3c14d228e065197"},

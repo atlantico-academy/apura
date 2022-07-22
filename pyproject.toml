@@ -24,6 +24,7 @@ plotly = "^5.9.0"
 gdown = "^4.5.1"
 papermill = "^2.3.4"
 isort = "^5.10.1"
+streamlit-option-menu = "^0.3.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

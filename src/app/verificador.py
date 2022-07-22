@@ -59,8 +59,7 @@ def page():
                     
                     e outros especializados em curadoria de notícias falsas.""")
 
-
-        '''        
+        '''
         with st.expander("Detalhamento"):
             with st.spinner(text='Avaliando cada termo...'):
                 col1, col2 = st.columns([.6, .4])
@@ -81,9 +80,9 @@ def worb_by_word_classification(text):
         if X_.iloc[0] != '':
             false_proba = model.predict_proba(X_)[0][0]
             # ----------------------------------
-            if false_proba >= .96:
+            if false_proba >= .8:
                 result.append((f"{word} ", 'false'))
-            elif false_proba <= .95:
+            elif false_proba <= .5:
                 result.append((f"{word} ", 'true'))
             else:
                 result.append(f"{word} ")
@@ -139,7 +138,7 @@ def process_text(text):
         )
     )    
 
-    return X_.lemmatization_wo_stopwords
+    return X_.lemmatization_plus_stop_words
             
 def show_results(y_hat, probs):
     '''
