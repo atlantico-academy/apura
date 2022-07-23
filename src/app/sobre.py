@@ -11,8 +11,8 @@ team = [{
     }
 },{
     'name': 'Douglas Araújo',
-    'bio': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac egestas augue. Aliquam id elementum orci. Sed vitae diam nec enim consectetur egestas sit amet id odio. ',
-    'picture': './images/panda_vermelho.jpeg',
+    'bio': 'Estudante de Ciência da Computação na Universidade Estadual do Ceará (UECE). Pesquisador/bolsista associado do Laboratório LAURA do Programa de Pós-Graduação em Ciência da Computação da UECE.',
+    'picture': './images/team_douglas.jpeg',
     'social media': {
         'linkedin':'',
         'github':'https://github.com/DouglasArS',
@@ -20,8 +20,8 @@ team = [{
     }
 },{
     'name': 'Samya Maria',
-    'bio': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac egestas augue. Aliquam id elementum orci. Sed vitae diam nec enim consectetur egestas sit amet id odio. ',
-    'picture': './images/panda_vermelho.jpeg',
+    'bio': 'Iniciante em ciência de dados, cursando Ciência da Computação.',
+    'picture': './images/team_samya.jpg',
     'social media': {
         'linkedin':'',
         'github':'https://github.com/SamyaMaria',
